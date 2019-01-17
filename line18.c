@@ -45,7 +45,7 @@ void main() {
 				__delay_ms(3);
 	    		PORTBbits.RB4 = 0;	//左
     			PORTBbits.RB7 = 0;	//右
-				__delay_ms(5);
+				__delay_ms(6);
 				PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
 				break;
 
