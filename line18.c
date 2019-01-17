@@ -25,13 +25,13 @@ void main() {
         flg = PORTAbits.RA4;
 
     while(1) {  //ループ
-		sensor = PORTA & 0b1111;	//白黒反転
+		sensor = ~PORTA & 0b1111;	//白黒反転
 
-		switch(sensor) {
-			case 0b0011:
+		switch(sensor) {	//1が白(ライン)
 			case 0b1100:
-			case 0b1111:
-			case 0b1001:	//RA1,RA2白(前進)
+			case 0b0011:
+			case 0b0000:
+			case 0b0110:	//RA1,RA2白(前進)
 				PORTBbits.RB1 = PORTBbits.RB2 = 1;	//LED on
 				PORTBbits.RB4 = 1;	//左
 				PORTBbits.RB5 = 0;
@@ -44,8 +44,8 @@ void main() {
 				PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
 				break;
 
-			case 0b1011:	//RA2白
-			case 0b0111:	//RA3白
+			case 0b0100:	//RA2白
+			case 0b1000:	//RA3白	
 				//右モータ回転
 				PORTBbits.RB2 = PORTBbits.RB3 = 1;	//LED on
 				PORTBbits.RB7 = 1;	//右
@@ -55,8 +55,8 @@ void main() {
 				PORTBbits.RB2 = PORTBbits.RB3 = 0;	//LED off
 				break;
 
-			case 0b1110:	//RA0白
-			case 0b1101:	//RA1白
+			case 0b0001:	//RA0白
+			case 0b0010:	//RA1白
 				//左モータ回転
 				PORTBbits.RB0 = PORTBbits.RB1 = 1;	//LED on
 				PORTBbits.RB4 = 1;	//左
