@@ -37,10 +37,10 @@ void main() {
 				PORTBbits.RB5 = 0;
 				PORTBbits.RB6 = 0;
     			PORTBbits.RB7 = 1;	//右
-				__delay_ms(4);
+				__delay_ms(3);
 	    		PORTBbits.RB4 = 0;	//左
     			PORTBbits.RB7 = 0;	//右
-				__delay_ms(5);
+				__delay_ms(6);
 				PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
 				break;
 
@@ -49,9 +49,9 @@ void main() {
 				//右モータ回転
 				PORTBbits.RB2 = PORTBbits.RB3 = 1;	//LED on
 				PORTBbits.RB7 = 1;	//右
-	      		__delay_ms(4);
+	      		__delay_ms(3);
 		    	PORTBbits.RB7 = 0;	//右
-    			__delay_ms(5);
+    			__delay_ms(6);
 				PORTBbits.RB2 = PORTBbits.RB3 = 0;	//LED off
 				break;
 
@@ -60,9 +60,9 @@ void main() {
 				//左モータ回転
 				PORTBbits.RB0 = PORTBbits.RB1 = 1;	//LED on
 				PORTBbits.RB4 = 1;	//左
-				__delay_ms(4);
+				__delay_ms(3);
 	    		PORTBbits.RB4 = 0;	//左
-		    	__delay_ms(5);
+		    	__delay_ms(6);
 				PORTBbits.RB0 = PORTBbits.RB1 = 0;	//LED off
 				break;
 		}
