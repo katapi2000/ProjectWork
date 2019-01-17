@@ -8,16 +8,10 @@
 
 #define _XTAL_FREQ 10000000
 
-#define LEFT 1
-#define RIGHT 2
-#define OUT 3
-
 void main() {
     TRISA = 0x1F;
 	TRISB = 0x00;
 
-	int flg = 0;
-	int course = OUT;	//仮設定直進
 	int sensor;
 
     while(PORTAbits.RA4 == 0) {
@@ -25,39 +19,46 @@ void main() {
 		PORTB = 0b00000000;
     }
 
-    while(PORTAbits.RA4 || !flg) {
-		flg = PORTAbits.RA4;
-
+    while(PORTAbits.RA4 == 1) {
         while(1) {  //ループ
-			//sensor = ~PORTA;	//白黒反転
-			
-			if(PORTAbits.RA1 && PORTAbits.RA2) {	//前進
-				PORTBbits.RB1 = PORTBbits.RB2 = 1;	//LED on
-				PORTB = 0b10010000;
-		        __delay_ms(0.5);
-		        PORTB = 0b00000000;
-		        __delay_ms(0.4);
-				PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
-			}else if(!PORTAbits.RA0) {
-				PORTBbits.RB2 = PORTBbits.RB3 = 1;	//LED on
-				//左旋回(右モータ回転)
-				PORTB = 0b10000000;
-				__delay_ms(0.5);
+			sensor = PORTA & 0b1111;	//白黒反転
 
-        		PORTB=0b00000000;
-       			 __delay_ms(0.4);
-       			course = LEFT;
-				PORTBbits.RB2 = PORTBbits.RB3 = 0;	//LED off
-			}else if(!PORTAbits.RA3) {
-				PORTBbits.RB0 = PORTBbits.RB1 = 1;	//LED on
-				//右旋回(左モータ回転)
-				PORTB = 0b00010000;
-				__delay_ms(0.5);
+			switch(sensor) {
+				case 0b1111:
+				case 0b1001:	//RA1,RA2白(前進)
+					PORTBbits.RB1 = PORTBbits.RB2 = 1;	//LED on
+					PORTBbits.RB4 = 1;	//左
+					PORTBbits.RB5 = 0;
+					PORTBbits.RB6 = 0;
+    				PORTBbits.RB7 = 1;	//右
+	    			__delay_ms(4);
+		    		PORTBbits.RB4 = 0;	//左
+    				PORTBbits.RB7 = 0;	//右
+	    			__delay_ms(5);
+					PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
+					break;
 
-        		PORTB=0b00000000;
-       			__delay_ms(0.4);
-       			course = RIGHT;
-				PORTBbits.RB0 = PORTBbits.RB1 = 0;	//LED off
+				case 0b1011:	//RA2白
+				case 0b0111:	//RA3白
+					//右モータ回転
+					PORTBbits.RB2 = PORTBbits.RB3 = 1;	//LED on
+					PORTBbits.RB7 = 1;	//右
+		      		__delay_ms(4);
+			    	PORTBbits.RB7 = 0;	//右
+    				__delay_ms(5);
+					PORTBbits.RB2 = PORTBbits.RB3 = 0;	//LED off
+					break;
+
+				case 0b1110:	//RA0白
+				case 0b1101:	//RA1白
+					//左モータ回転
+					PORTBbits.RB0 = PORTBbits.RB1 = 1;	//LED on
+					PORTBbits.RB4 = 1;	//左
+	    			__delay_ms(4);
+		    		PORTBbits.RB4 = 0;	//左
+			    	__delay_ms(5);
+					PORTBbits.RB0 = PORTBbits.RB1 = 0;	//LED off
+					break;
 			}
         }
     }
