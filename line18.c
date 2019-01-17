@@ -12,6 +12,7 @@ void main() {
     TRISA = 0x1F;
 	TRISB = 0x00;
 
+    int flg = 0;
 	int sensor;
 
     while(PORTAbits.RA4 == 0) {
@@ -19,7 +20,10 @@ void main() {
 		PORTB = 0b00000000;
     }
 
-    while(PORTAbits.RA4 == 1) {
+    while(PORTAbits.RA4 || !flg) {
+
+        flg = PORTAbits.RA4;
+
         while(1) {  //ループ
 			sensor = PORTA & 0b1111;	//白黒反転
 
