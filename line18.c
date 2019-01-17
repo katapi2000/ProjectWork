@@ -33,7 +33,8 @@ void main() {
 		sensor = ~PORTA & 0b1111;	//白黒反転
 
 		switch(sensor) {	//1が白(ライン)
-			case 0b0110:	//RA1,RA2白(前進)
+			//前進
+			case 0b0110:
 			case 0b1001:
 				PORTBbits.RB1 = PORTBbits.RB2 = 1;	//LED on
 				PORTBbits.RB4 = 1;	//左
@@ -43,13 +44,14 @@ void main() {
 				__delay_ms(3);
 	    		PORTBbits.RB4 = 0;	//左
     			PORTBbits.RB7 = 0;	//右
-				__delay_ms(6);
+				__delay_ms(5);
 				PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
 				break;
 
 			case 0b0100:	//RA2白
 			case 0b1000:	//RA3白	
 			case 0b1100:
+			case 0b1010:
 				//右モータ回転
 				PORTBbits.RB2 = PORTBbits.RB3 = 1;	//LED on
 				PORTBbits.RB7 = 1;	//右
@@ -63,6 +65,7 @@ void main() {
 			case 0b0001:	//RA0白
 			case 0b0010:	//RA1白
 			case 0b0011:
+			case 0b0101:
 				//左モータ回転
 				PORTBbits.RB0 = PORTBbits.RB1 = 1;	//LED on
 				PORTBbits.RB4 = 1;	//左
