@@ -28,6 +28,8 @@ void main() {
 		sensor = PORTA & 0b1111;	//白黒反転
 
 		switch(sensor) {
+			case 0b0011:
+			case 0b1100:
 			case 0b1111:
 			case 0b1001:	//RA1,RA2白(前進)
 				PORTBbits.RB1 = PORTBbits.RB2 = 1;	//LED on
