@@ -1,3 +1,4 @@
+//電圧:5.5V
 #include <XC.h>
 #include <pic16f84a.h>
 
