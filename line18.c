@@ -109,6 +109,13 @@ void main() {
 					PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
 				}
 				break;
+
+			case 0b1111:
+					//ゴール時のさり気ない喜びの表現(?)
+					PORTBbits.RB1 = PORTBbits.RB2 = PORTBbits.RB1 = PORTBbits.RB2 = 1;
+					__delay_ms(250);
+					PORTBbits.RB1 = PORTBbits.RB2 = PORTBbits.RB1 = PORTBbits.RB2 = 0;
+					__delay_ms(250);
 		}
     }
 }
