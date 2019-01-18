@@ -27,40 +27,6 @@ void main() {
     }
 
     while(PORTAbits.RA4 || !flg) 
-<<<<<<< HEAD
-		flg = PORTAbits.RA4;
-
-    while(1) {  //ループ
-		//sensor = ~PORTA;	//白黒反転
-		
-		if(PORTAbits.RA1 && PORTAbits.RA2) {	//前進
-			PORTBbits.RB1 = PORTBbits.RB2 = 1;	//LED on
-			PORTB = 0b10010000;
-	        __delay_ms(0.5);
-	        PORTB = 0b00000000;
-	        __delay_ms(0.4);
-			PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
-		}else if(!PORTAbits.RA0) {
-			PORTBbits.RB2 = PORTBbits.RB3 = 1;	//LED on
-			//左旋回(右モータ回転)
-			PORTB = 0b10000000;
-			__delay_ms(0.5);
-
-    		PORTB=0b00000000;
-    		 __delay_ms(0.4);
-    		course = LEFT;
-			PORTBbits.RB2 = PORTBbits.RB3 = 0;	//LED off
-		}else if(!PORTAbits.RA3) {
-			PORTBbits.RB0 = PORTBbits.RB1 = 1;	//LED on
-			//右旋回(左モータ回転)
-			PORTB = 0b00010000;
-			__delay_ms(0.5);
-
-    		PORTB=0b00000000;
-    		__delay_ms(0.4);
-    		course = RIGHT;
-			PORTBbits.RB0 = PORTBbits.RB1 = 0;	//LED off
-=======
 
         flg = PORTAbits.RA4;
 
@@ -143,7 +109,6 @@ void main() {
 					PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
 				}
 				break;
->>>>>>> switch
 		}
     }
 }
