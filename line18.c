@@ -1,4 +1,3 @@
-//電圧:5.5V
 #include <XC.h>
 #include <pic16f84a.h>
 
@@ -45,7 +44,7 @@ void main() {
 				__delay_ms(3);
 	    		PORTBbits.RB4 = 0;	//左
     			PORTBbits.RB7 = 0;	//右
-				__delay_ms(6);
+				__delay_ms(4);
 				PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
 				break;
 
@@ -56,9 +55,9 @@ void main() {
 				//右モータ回転
 				PORTBbits.RB2 = PORTBbits.RB3 = 1;	//LED on
 				PORTBbits.RB7 = 1;	//右
-	      		__delay_ms(3);
+	      		__delay_ms(2.5);
 		    	PORTBbits.RB7 = 0;	//右
-    			__delay_ms(6);
+    			__delay_ms(3);
 				PORTBbits.RB2 = PORTBbits.RB3 = 0;	//LED off
 				course = RIGHT;		//右に飛び出し
 				break;
@@ -70,9 +69,9 @@ void main() {
 				//左モータ回転
 				PORTBbits.RB0 = PORTBbits.RB1 = 1;	//LED on
 				PORTBbits.RB4 = 1;	//左
-				__delay_ms(3);
+				__delay_ms(2.5);
 	    		PORTBbits.RB4 = 0;	//左
-		    	__delay_ms(6);
+		    	__delay_ms(3);
 				PORTBbits.RB0 = PORTBbits.RB1 = 0;	//LED off
 				course = LEFT;	//左に飛び出し
 				break;
@@ -85,7 +84,7 @@ void main() {
 					PORTBbits.RB4 = 1;	//左
 					__delay_ms(3);
 	    			PORTBbits.RB4 = 0;	//左
-		    		__delay_ms(6);
+		    		__delay_ms(5);
 					PORTBbits.RB0 = PORTBbits.RB1 = 0;	//LED off
 				}else if(course == RIGHT) {
 					//左旋回
@@ -93,7 +92,7 @@ void main() {
 					PORTBbits.RB7 = 1;	//右
 	      			__delay_ms(3);
 		    		PORTBbits.RB7 = 0;	//右
-    				__delay_ms(6);
+    				__delay_ms(5);
 					PORTBbits.RB2 = PORTBbits.RB3 = 0;	//LED off
 				}else if(course == OUT) {
 					//直進
@@ -105,17 +104,17 @@ void main() {
 					__delay_ms(3);
 		    		PORTBbits.RB4 = 0;	//左
    		 			PORTBbits.RB7 = 0;	//右
-					__delay_ms(6);
+					__delay_ms(5);
 					PORTBbits.RB1 = PORTBbits.RB2 = 0;	//LED off
 				}
 				break;
-
-			case 0b1111:
-					//ゴール時のさり気ない喜びの表現(?)
-					PORTBbits.RB1 = PORTBbits.RB2 = PORTBbits.RB1 = PORTBbits.RB2 = 1;
-					__delay_ms(250);
-					PORTBbits.RB1 = PORTBbits.RB2 = PORTBbits.RB1 = PORTBbits.RB2 = 0;
-					__delay_ms(250);
+				
+				case 0b1111:
+					PORTBbits.RB0 = PORTBbits.RB1 = PORTBbits.RB2 = PORTBbits.RB3 = 1;	//LED on
+					__delay_ms(100);
+					PORTBbits.RB0 = PORTBbits.RB1 = PORTBbits.RB2 = PORTBbits.RB3 = 0;	//LED off
+					__delay_ms(100);
+					break;
 		}
     }
 }
